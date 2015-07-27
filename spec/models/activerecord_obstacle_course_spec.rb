@@ -11,7 +11,7 @@ describe "ActiveRecord Obstacle Course" do
   let!(:order_3) { Order.create(amount: 500, items: [item_2, item_3, item_4, item_5]) }
   let!(:order_4) { Order.create(amount: 500, items: [item_1, item_1, item_2, item_3]) }
 
-  xit "finds orders by amount" do
+  it "finds orders by amount" do
     # ----------------------- Using Ruby -------------------------
     orders_of_500 = Order.all.select { |order| order.amount == 500 }
     orders_of_200 = Order.all.select { |order| order.amount == 200 }
@@ -31,7 +31,7 @@ describe "ActiveRecord Obstacle Course" do
 
   end
 
-  xit "finds multiple items by id" do
+  it "finds multiple items by id" do
     ids   = [item_1.id, item_2.id, item_4.id]
     # ----------------------- Using Ruby -------------------------
     # items = Item.all.select { |item| ids.include?(item.id) }
@@ -50,7 +50,7 @@ describe "ActiveRecord Obstacle Course" do
     expect(items).to eq([item_1, item_2, item_4])
   end
 
-  xit "sorts the orders from most expensive to least expensive" do
+  it "sorts the orders from most expensive to least expensive" do
     # ----------------------- Using Ruby -------------------------
     orders = Order.all.sort_by { |order| order.amount }.reverse
     # ------------------------------------------------------------
@@ -64,7 +64,7 @@ describe "ActiveRecord Obstacle Course" do
     expect(orders).to eq([order_4, order_3, order_2, order_1])
   end
 
-  xit "plucks all values from one column" do
+  it "plucks all values from one column" do
     # ----------------------- Using Ruby -------------------------
     names = Item.all.map(&:name)
     # ------------------------------------------------------------
@@ -78,7 +78,7 @@ describe "ActiveRecord Obstacle Course" do
     expect(names).to eq(["Thing 1", "Thing 2", "Thing 3", "Thing 4", "Thing 5"])
   end
 
-  xit "returns the average amount for all orders" do
+  it "returns the average amount for all orders" do
     # ---------------------- Using Ruby -------------------------
     average = (Order.all.map(&:amount).inject(:+)) / (Order.count)
     # -----------------------------------------------------------
@@ -92,7 +92,7 @@ describe "ActiveRecord Obstacle Course" do
     expect(average).to eq(375)
   end
 
-  xit "calculates the total sales" do
+  it "calculates the total sales" do
     # ---------------------- Using Ruby -------------------------
     total_sales = Order.all.map(&:amount).inject(:+)
     # -----------------------------------------------------------
@@ -106,7 +106,7 @@ describe "ActiveRecord Obstacle Course" do
     expect(total_sales).to eq(1500)
   end
 
-  xit "returns all orders for item_4" do
+  it "returns all orders for item_4" do
     # ------------------ Inefficient Solution -------------------
     order_ids = OrderItem.where(item_id: item_4.id).map(&:order_id)
     orders    = Order.find(order_ids)
@@ -121,7 +121,7 @@ describe "ActiveRecord Obstacle Course" do
     expect(orders).to eq([order_3])
   end
 
-  xit "returns items that are associated with one or more orders" do
+  it "returns items that are associated with one or more orders" do
     unordered_item = Item.create(name: "Unordered Item")
     # ----------------------- Using Ruby -------------------------
     items          = Item.all
