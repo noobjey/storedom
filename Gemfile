@@ -15,7 +15,6 @@ gem 'less-rails-bootstrap'
 
 group :development, :test do
   gem 'capybara'
-  gem 'pry', :require => 'pry'
   gem 'byebug'
   gem 'bullet'
 end
