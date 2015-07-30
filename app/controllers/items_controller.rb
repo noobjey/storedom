@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   def index
+    cookies[:hit_counter] = cookies[:hit_counter].to_i + 1
     @items = Item.all
   end
 
